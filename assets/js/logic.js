@@ -18,16 +18,18 @@ var startButton = document.querySelector("#start");
 
 const quizTime = questions.length * 10;
 let quizTimer;
+var currentQuest = 0;
 
+startButton.onclick = quizGo; /// hooks up the start buttin to the quiz go function!
 
-function startQuiz () {
+function quizGo () {
 
 //show the quiz questions
 
 questionsElement.removeAttribute("class")
 
 // get the clock running on the page!
-quizTimer = setInterval (seconds, 1000)
+quizTimer = setInterval (seconds, 1000)  // 1000 is equal to 1 second (1k milliseconds)
 
 timeElement.textContent = quizTime;
 
@@ -35,6 +37,43 @@ showQuestion();
 
 }
 
+
+// shows the questions!
+
+function showQuestion () {
+
+var currentQuestion = questions[currentQuest]
+
+questionTitleElement = document.getElementById("qustion-title");
+questionTitleElement = currentQuestion.question;
+
+ // clear out any old question choices
+ choicesElement.innerHTML = ""; // otherwise the questions just stack!
+
+// 
+
+currentQuestion.options.forEach(function(answer, i) {
+    var choiceNode = document.createElement("button");
+    choiceNode.setAttribute("class", "choice");
+    choiceNode.setAttribute("value", answer);
+
+    choiceNode.textContent = i + 1 + ". " + answer;
+
+    // attach click event listener to each choice
+    choiceNode.onclick = questionClick;
+
+    // display on the page
+    choicesElement.appendChild(choiceNode);
+
+
+});   
+
+}
+
+function questionClick ()
+{
+
+}
 
 
 
