@@ -11,10 +11,12 @@ const audioIncorrect = new Audio("./assets/sfx/incorrect.wav");
 let currentQuestionIndex = 0;
 let time = questions.length * 10;
 let timerId;
+let correctAnswers = 0;
 
 startButton.addEventListener("click", startQuiz);
 
 function startQuiz() {
+  correctAnswers = 0;
   // hide start screen
   startButton.parentElement.classList.add("hide");
 
@@ -62,13 +64,15 @@ function createChoiceButton(choice, i) {
 
 function questionClick() {
   // check if user guessed wrong
+
   if (this.value !== questions[currentQuestionIndex].correctAnswer) {
     // penalize time
-    time -= 5;
+    time -= 10;
 
-    if (time <= 0) {
+    if (time < 0) {
       time = 0;
     }
+
     audioIncorrect.play();
 
     // display new time on page
@@ -83,11 +87,12 @@ function questionClick() {
     initfeedbackElement.textContent = "Yay go you!";
     initfeedbackElement.style.color = "pink";
     initfeedbackElement.style.fontSize = "48px";
+    correctAnswers++;
   }
 
   // flash right/wrong feedback
   initfeedbackElement.setAttribute("class", "feedback");
-  setTimeout(function() {
+  setTimeout(function () {
     initfeedbackElement.setAttribute("class", "feedback hide");
   }, 1000);
 
@@ -103,35 +108,34 @@ function questionClick() {
 }
 
 function quizEnd() {
-    clearInterval(timerId);
-    displayResults();
+  clearInterval(timerId);
+  if (correctAnswers === 0) {
+    time = 0;
+  }
+  displayResults();
 }
 
 function displayResults() {
-    const endScreenEl = document.getElementById("end-screen");
-    endScreenEl.classList.remove("hide");
-    const finalScoreEl = document.getElementById("final-score");
-    finalScoreEl.textContent = time;
-    questionsElement.classList.add("hide");
+  const endScreenEl = document.getElementById("end-screen");
+  endScreenEl.classList.remove("hide");
+  const finalScoreEl = document.getElementById("final-score");
+  finalScoreEl.textContent = time;
+  questionsElement.classList.add("hide");
 }
 
+let endScreenEl = document.getElementById("end-screen");
+function clockTick() {
+  // check if quiz has ended
+  if (!endScreenEl.classList.contains("hide")) return;
+  // update time
+  time--;
+  timerElement.textContent = time;
 
-
-
-  let endScreenEl = document.getElementById("end-screen");
-  function clockTick() {
-    // check if quiz has ended
-    if(!endScreenEl.classList.contains("hide")) return;
-    // update time
-    time--;
-    timerElement.textContent = time;
-  
-    // check if user ran out of time
-    if (time <= 0) {
-      quizEnd();
-    }
+  // check if user ran out of time
+  if (time <= 0) {time = 0;
+    quizEnd();
   }
-  
+}
 
 function saveHighscore() {
   // get value of input box
@@ -145,7 +149,7 @@ function saveHighscore() {
     // format new score object for current user
     var newScore = {
       score: time,
-      initials: initials
+      initials: initials,
     };
 
     // save to localstorage
@@ -173,5 +177,5 @@ startButton.addEventListener("click", startQuiz);
 initialsElement.onkeyup = checkForEnter;
 
 function myFunction() {
-    document.getElementById("startscreen").setAttribute("class", "hide"); 
-  }
+  document.getElementById("startscreen").setAttribute("class", "hide");
+}

@@ -12,7 +12,7 @@ const questions = [
   {
     question:
       "Which of the following is a way to associate styles with your HTML document?",
-      choices: [
+    choices: [
       "External CSS - The Element",
       "Imported CSS - @import Rule",
       "Both of the above",
@@ -37,19 +37,20 @@ const questions = [
     correctAnswer: "<a>",
   },
   {
-    question: "Which attribute is used to specify the media type of a CSS file?",
+    question:
+      "Which attribute is used to specify the media type of a CSS file?",
     choices: ["type", "href", "rel", "media"],
     correctAnswer: "media",
   },
   {
-    question: "Which property is used to set the background color of an element?",
+    question:
+      "Which property is used to set the background color of an element?",
     choices: ["color", "background-color", "bgcolor", "background"],
     correctAnswer: "background-color",
   },
   {
     question: "Which event is used to detect when a user clicks an element?",
     choices: ["onclick", "onmouseclick", "onpress", "onactivate"],
-    correctAnswer: "onclick"
+    correctAnswer: "onclick",
   },
 ];
- 
