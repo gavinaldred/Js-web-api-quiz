@@ -31,5 +31,25 @@ const questions = [
     choices: ["<script>", "<js>", "<javascript>", "<code>"],
     correctAnswer: "<script>",
   },
+  {
+    question: "Which HTML tag is used to create a link?",
+    choices: ["<a>", "<link>", "<href>", "<url>"],
+    correctAnswer: "<a>",
+  },
+  {
+    question: "Which attribute is used to specify the media type of a CSS file?",
+    choices: ["type", "href", "rel", "media"],
+    correctAnswer: "media",
+  },
+  {
+    question: "Which property is used to set the background color of an element?",
+    choices: ["color", "background-color", "bgcolor", "background"],
+    correctAnswer: "background-color",
+  },
+  {
+    question: "Which event is used to detect when a user clicks an element?",
+    choices: ["onclick", "onmouseclick", "onpress", "onactivate"],
+    correctAnswer: "onclick"
+  },
 ];
  
