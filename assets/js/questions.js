@@ -33,12 +33,7 @@ const questions = [
   },
 ];
  
-// How do you write "Hello World" in an alert box?
 
-//  msg("Hello World")
-//  alertBox("Hello World");
-//  msgBox("Hello World");
-//  alert("Hello World");
 
 // // A start button function
 //     // loads Q&A
