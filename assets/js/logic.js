@@ -58,6 +58,8 @@ function getQuestion() {
   });
 }
 
+
+
 function questionClick() {
   // check if user guessed wrong
   if (this.value !== questions[currentQuestionIndex].correctAnswer) {
@@ -67,12 +69,15 @@ function questionClick() {
     if (time <= 0) {
       time = 0;
     }
+    audioIncorrect.play()
     // display new time on page
     timerElement.textContent = time;
-    initfeedbackElement.textContent = "nope!";
-    initfeedbackElement.style.color = "red";
-    initfeedbackElement.style.fontSize = "400%";
+    // page messages
+    initfeedbackElement.textContent = "nope!"
+    initfeedbackElement.style.color = "red"
+    initfeedbackElement.style.fontSize = "400%" 
   } else {
+    audioCorrect.play()
     initfeedbackElement.textContent = "Yay go you!";
     initfeedbackElement.style.color = "green";
     initfeedbackElement.style.fontSize = "400%";
