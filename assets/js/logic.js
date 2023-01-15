@@ -13,9 +13,16 @@ let time = questions.length * 10;
 let timerId;
 let correctAnswers = 0;
 
+
+
 startButton.addEventListener("click", startQuiz);
 
+
+
 function startQuiz() {
+  
+ 
+  shuffle(questions)
   correctAnswers = 0;
   // hide start screen
   startButton.parentElement.classList.add("hide");
@@ -26,6 +33,8 @@ function startQuiz() {
   // start timer
   timerId = setInterval(clockTick, 1000);
 
+timerElement.classList.add("flash");
+
   // show starting time
   timerElement.textContent = time;
 
@@ -33,6 +42,7 @@ function startQuiz() {
 }
 
 function getQuestion() {
+ 
   // get current question object from array
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -71,9 +81,7 @@ function questionClick() {
 
     if (time < 0) {
       time = 0;
-    }
-
-    audioIncorrect.play();
+    } 
 
     // display new time on page
     timerElement.textContent = time;
@@ -82,6 +90,7 @@ function questionClick() {
     initfeedbackElement.textContent = "nope!";
     initfeedbackElement.style.color = "red";
     initfeedbackElement.style.fontSize = "48px";
+    audioIncorrect.play();
   } else {
     audioCorrect.play();
     initfeedbackElement.textContent = "Yay go you!";
@@ -113,6 +122,7 @@ function quizEnd() {
     time = 0;
   }
   displayResults();
+  timerElement.classList.remove("flash");
 }
 
 function displayResults() {
@@ -176,6 +186,3 @@ startButton.addEventListener("click", startQuiz);
 
 initialsElement.onkeyup = checkForEnter;
 
-function myFunction() {
-  document.getElementById("startscreen").setAttribute("class", "hide");
-}
