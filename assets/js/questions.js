@@ -1,4 +1,4 @@
-
+// Array of objects for questions
 const questions = [
   {
     question: "What does HTML stand for?",
@@ -56,7 +56,7 @@ const questions = [
   },
 ];
 
-function shuffle(array) { // thanks chatGPT for the guidance on how to shuffle an array
+function shuffle(array) { // thanks chatGPT for the guidance on how to shuffle an array. Randomises the questions. 
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];

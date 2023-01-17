@@ -18,12 +18,13 @@ function printHighscores() {
   });
 }
 
+// function to clear high scores
 function clearHighscores() {
   window.localStorage.removeItem("highscores");
   let olEl = document.getElementById("highscores");
   olEl.innerHTML = "";
 }
-
+// prevent default
 document.getElementById("clear").addEventListener("click", function (prevD) {
   prevD.preventDefault();
   clearHighscores();

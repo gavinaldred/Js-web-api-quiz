@@ -1,3 +1,5 @@
+// DOM Elements
+
 const questionsElement = document.querySelector("#questions");
 const timerElement = document.querySelector("#time");
 const choicesElement = document.querySelector("#choices");
@@ -8,21 +10,22 @@ const initfeedbackElement = document.querySelector("#feedback");
 const audioCorrect = new Audio("./assets/sfx/correct.wav");
 const audioIncorrect = new Audio("./assets/sfx/incorrect.wav");
 
+// gameplay variables
 let currentQuestionIndex = 0;
 let time = questions.length * 10;
 let timerId;
 let correctAnswers = 0;
 
 
-
+// checking for a click on the start button, then starts quiz
 startButton.addEventListener("click", startQuiz);
 
 
-
+// function to start the quiz
 function startQuiz() {
   
  
-  shuffle(questions)
+  shuffle(questions) // randomises the questions
   correctAnswers = 0;
   // hide start screen
   startButton.parentElement.classList.add("hide");
@@ -38,10 +41,10 @@ timerElement.classList.add("flash");
   // show starting time
   timerElement.textContent = time;
 
-  getQuestion();
+  getQuestion(); // calss get question function
 }
 
-function getQuestion() {
+function getQuestion() { // gets and presents questions
  
   // get current question object from array
   const currentQuestion = questions[currentQuestionIndex];
@@ -63,6 +66,7 @@ function getQuestion() {
   }
 }
 
+// shows the questions on the page
 function createChoiceButton(choice, i) {
   const choiceNode = document.createElement("button");
   choiceNode.classList.add("choice");
@@ -86,13 +90,13 @@ function questionClick() {
     // display new time on page
     timerElement.textContent = time;
 
-    // page messages
+    // on page page messages incorrect
     initfeedbackElement.textContent = "nope!";
     initfeedbackElement.style.color = "red";
     initfeedbackElement.style.fontSize = "48px";
     audioIncorrect.play();
-  } else {
-    audioCorrect.play();
+  } else { // on page messages correct answer
+    audioCorrect.play(); 
     initfeedbackElement.textContent = "Yay go you!";
     initfeedbackElement.style.color = "pink";
     initfeedbackElement.style.fontSize = "48px";
@@ -105,7 +109,7 @@ function questionClick() {
     initfeedbackElement.setAttribute("class", "feedback hide");
   }, 1000);
 
-  // next question
+  // next question length checker
   currentQuestionIndex++;
 
   // time checker
@@ -116,16 +120,17 @@ function questionClick() {
   }
 }
 
+//end game function
 function quizEnd() {
   clearInterval(timerId);
-  if (correctAnswers === 0) {
+  if (correctAnswers === 0) { // sets user score to zero if not correct answers
     time = 0;
   }
   displayResults();
-  timerElement.classList.remove("flash");
+  timerElement.classList.remove("flash"); // stops the timer flashing
 }
 
-function displayResults() {
+function displayResults() { // shows the final score
   const endScreenEl = document.getElementById("end-screen");
   endScreenEl.classList.remove("hide");
   const finalScoreEl = document.getElementById("final-score");
@@ -172,17 +177,16 @@ function saveHighscore() {
 }
 
 function checkForEnter(event) {
-  // "13" represents the enter key
+  // saving score when enter key is used
   if (event.key === "Enter") {
     saveHighscore();
   }
 }
 
-// submit initials
+// submit initials // runs save high score function 
 submitButton.addEventListener("click", saveHighscore);
 
-// start quiz
-startButton.addEventListener("click", startQuiz);
+
 
 initialsElement.onkeyup = checkForEnter;
 
